@@ -178,6 +178,57 @@ const data = [
   console.log(newGenres);
 
   //creating an new object with the previos object and adding some new properties on top of it.
-  const newBook = {...book, type: "Hard Cover", pages: "2000"};
+  const newBook = {...book, type: "Hard Cover", pages: 200, noOfAwards: 0};
   console.log(newBook);
   //Here in the above example the pages key's value is been overridden by the new value as we change the value by again ading the same 'pages' property with a new value after doing the spread operation
+
+
+  /****************************************TEMPLATE LITERALS***************************************/
+  //Template literals are the type of string representation where we can represent any javascript variables/expression inside a string.
+  //It is denoted by ``(backticks).
+  
+  const myBook = `The author of ${title} is ${author}`;
+  console.log(myBook);
+
+  /***************************************TERNARY OPERATOR****************************************/
+  //Ternary operator is used incase of the conditional execution of the statements or set of statements 
+  // (condition)? expression1 : expression2
+
+const pageRange = parseInt(newBook.pages) > 100 ? "Over a hundred" : "less than a hundred" ;
+console.log(pageRange);
+
+/*****************************************ARROW FUNCTIONS*****************************************/
+//Arrow functions are compact way of defining a function which has its own semantics alternative to the traditional method defining the functions.
+//Traditional way of defining a function
+function getYear(published){
+    return published.split('-')[0];
+}
+
+const yearOfPublication = getYear(published);
+console.log(yearOfPublication)
+
+//Defining the same above function with the help of arrow function
+const getYearArrow = (published)=>(published.split('-')[0]);
+
+const yearOfPublication1 = getYearArrow(published);
+console.log(yearOfPublication1)
+
+/*************************SHORT-CUTTING AND LOGICAL OPERATOR(&&, ||, ??***********************************/
+//Short-cutting and logical operator can be used to conditionally execute the expression based on value of a variable.
+//These operators can be used to render or the execute the statement based on truthy and falsey values.
+
+console.log(true && "This will get execute");
+console.log(false && "The result of this expression is false");
+
+//Let's try this out with any truthy value;
+console.log(yearOfPublication && 2017);
+console.log(yearOfPublication || 2017);
+//falsy value are false, 0(zero), undefined, null and NaN 
+console.log(yearOfPublication.time && '20:14');
+
+//The nullish coalescing (??) operator is a logical operator that returns its right-hand side operand when its left-hand side operand is null or undefined, and otherwise returns its left-hand side operand.
+//This is wrong
+console.log(newBook.noOfAwards || "no data");
+
+// This is right
+console.log(newBook.noOfAwards ?? "no data");
