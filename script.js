@@ -232,3 +232,88 @@ console.log(newBook.noOfAwards || "no data");
 
 // This is right
 console.log(newBook.noOfAwards ?? "no data");
+
+/****************************OPTIONAL CHAINING *******************************/
+//Optional Chaining is the method of wrirting an expression where we try to fetch a value from a particular object or array which can be undefined and hence can be used to neglect a particular undefined property reading error.
+const newBook1 = {...newBook, reviews: {critics: 546, readOmeter: 1002, bookStar: 4321 }};
+const newBook2 = {...newBook, edition: "2nd Edition",  reviews: {critics: 243,  peopleChoice: 780, bookStar: 2312 }};
+
+const getReviewsSum = (book) => {
+    const criticsReview = book?.reviews?.critics ?? 0;
+    const readOmeterReview = book?.reviews?.readOmeter ?? 0;
+    const bookStarReview = book?.reviews?.bookStar ?? 0;
+
+    return criticsReview + readOmeterReview +bookStarReview;
+
+}
+
+const newBook1Reviews = getReviewsSum(newBook1);
+console.log(newBook1Reviews);
+const newBook2Reviews = getReviewsSum(newBook2);
+console.log(newBook2Reviews);
+
+
+/****************************************ARRAY METHODS*********************************************/
+//The Map() Method
+/*The Map method is an array method/function which will iterate over an array and return a new array with the same length of
+the parent array. This method will iterate over each and every element of the parent array and will execute a callback functions and 
+perform some specific operation and will return (generate) a new array having the same length
+
+NOTE: map(), forEach(), filter(), reduce() are all array methods which will iterate of an array but the differnce will be the 
+return values
+
+SYNTAX:-
+
+const newArray = array.map(Callback(element, index, array) thisArgs);
+*/
+const array = [1, 2, 3, 4, 5];
+const newArray = array.map((ele) => ele * 2);
+console.log(newArray)
+
+//Let's retun the tile of each and every book from the data array
+
+const bookTitles = data.map((book) => book.title);
+console.log(bookTitles);
+
+const titlesAndAuthors = data.map((book) =>
+    //Declaration Block
+    {
+        return {
+            title: book?.title,
+            author: book?.author
+        }
+    }
+);
+
+console.log(titlesAndAuthors);
+
+//filter() Method: 
+/*  filter() method is also an iteration method which will iterate over each and every element of an array and will return a new array containing the 
+    elements which will satisfy the creteria or condition defined inside the callback function.
+
+    SYNTAX:-
+    
+    Array.filter(function callback(element, index, array) this.Arg);
+*/ 
+
+//Exmaple 1
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const evenNumbers = numbers.filter((num) => num % 2 === 0);
+console.log(evenNumbers);
+
+//Example 2
+const points = [3.18, 3.25, 3.33, 3.47, 3.68, 3.72, 3.81, 3.94];
+const newPoints = points.filter((point)=>{
+    if(point > 3.50){
+        return point
+    }
+});
+
+console.log(newPoints);
+
+//Getting the longBooks 
+const longBooks = data.filter((book) => book?.pages > 300 ).filter((book) => Number(book?.published?.split('-')[0]) > 2016)
+console.log(longBooks);
+
+const javaScriptBooks = data.filter((book) => book?.title?.includes('JavaScript')).map((book) => book?.title)
+console.log(javaScriptBooks)
